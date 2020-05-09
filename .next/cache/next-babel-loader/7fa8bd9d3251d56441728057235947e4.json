@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nexport default (() => __jsx(\"span\", null, \"Index\"));","map":{"version":3,"sources":["D:/al_y/za/code/github-next/pages/index.js"],"names":[],"mappings":";;AAAA,gBAAe,MAAM,4BAArB","sourcesContent":["export default () => <span>Index</span>"]},"metadata":{},"sourceType":"module"}
