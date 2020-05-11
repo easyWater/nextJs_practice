@@ -1,13 +1,36 @@
-import Comp from '../components/comp'
+import Link from 'next/link'
 import { withRouter } from 'next/router'
+import styled from 'styled-components'
+// import moment from 'moment'
+import dynamic from 'next/dynamic'
+const Comp = dynamic(import('../components/comp'))
 
-const A = ({ router, name }) => <Comp>A {router.query.id} {name}</Comp>
+const Title = styled.h1`
+  font-size: 20px;
+  color: pink;
+`
+
+const A = ({ router, name, time }) => {
+  return (
+    <>
+      <Link href="#aaa">
+        <a>
+          A {router.query.id} {name}
+          <Title>this is title {time}</Title>
+          <Comp />
+        </a>
+      </Link>
+    </>
+  )
+}
 
 A.getInitialProps = async () => {
+  const moment = await import('moment')
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        name: 'easy_water'
+        name: 'easy_water',
+        time: moment.default(Date.now() - 60 * 1000).fromNow()
       })
     }, 1000)
   })

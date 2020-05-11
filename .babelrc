@@ -6,6 +6,9 @@
       {
         "libraryName": "and"
       }
+    ],
+    [
+      "styled-components", {"ssr": true}
     ]
   ]
 }

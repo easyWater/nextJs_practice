@@ -1,5 +1,10 @@
 export default () => {
   return (
-    <span>Index</span>
+    <span>
+      Index
+      <a>
+        a
+      </a>
+    </span>
   )
 }

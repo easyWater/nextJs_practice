@@ -28,11 +28,11 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
-    "/index": [
+    "/a": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/test/b": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

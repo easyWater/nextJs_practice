@@ -2276,12 +2276,13 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
   static async getInitialProps({
-    Component
+    Component,
+    ctx
   }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps();
+      pageProps = await Component.getInitialProps(ctx);
     }
 
     return {
