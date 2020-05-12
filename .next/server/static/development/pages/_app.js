@@ -147,6 +147,22 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 /***/ }),
 
+/***/ "./lib/myContext.js":
+/*!**************************!*\
+  !*** ./lib/myContext.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(''));
+
+/***/ }),
+
 /***/ "./node_modules/antd/dist/antd.css":
 /*!*****************************************!*\
   !*** ./node_modules/antd/dist/antd.css ***!
@@ -2268,13 +2284,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/dist/antd.css */ "./node_modules/antd/dist/antd.css");
 /* harmony import */ var antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layout */ "./components/layout.jsx");
+/* harmony import */ var _lib_myContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/myContext */ "./lib/myContext.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
 
 class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      context: 'context'
+    });
+  }
+
   static async getInitialProps({
     Component,
     ctx
@@ -2295,7 +2324,13 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       Component,
       pageProps
     } = this.props;
-    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(Component, pageProps)));
+    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(_lib_myContext__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
+      value: this.state.context
+    }, __jsx(Component, pageProps), __jsx("button", {
+      onClick: () => this.setState({
+        context: this.state.context + '000'
+      })
+    }, "change context"))));
   }
 
 }

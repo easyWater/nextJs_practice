@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { withRouter } from 'next/router'
 import styled from 'styled-components'
 // import moment from 'moment'
+// import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
 const Comp = dynamic(import('../components/comp'))
 
@@ -10,12 +11,15 @@ const Title = styled.h1`
   color: pink;
 `
 
+// const {serverRuntimeConfig, publicRuntimeConfig} = getConfig()
+
 const A = ({ router, name, time }) => {
+  // console.log(serverRuntimeConfig, publicRuntimeConfig)
   return (
     <>
       <Link href="#aaa">
         <a>
-          A {router.query.id} {name}
+          A {router.query.id} {name} {process.env.customKey}
           <Title>this is title {time}</Title>
           <Comp />
         </a>
