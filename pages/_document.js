@@ -33,7 +33,6 @@ class myDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>my app</title>
         </Head>
         <body>
           <Main/>

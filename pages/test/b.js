@@ -1,7 +1,12 @@
-import React, {useState, useReducer, useEffect, useLayoutEffect, useContext} from 'react'
+import React, {useState, useReducer, useEffect, useLayoutEffect, useContext, useRef} from 'react'
 import MyContext from '../../lib/myContext'
 
 class B extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.ref = React.createRef()
+  }
 
   state = {
     count: 0
@@ -9,6 +14,7 @@ class B extends React.Component {
 
   componentDidMount() {
     this.timeId = setInterval(() => {
+      this.ref.current
       this.setState({count: this.state.count + 1})
     }, 1000)
   }
@@ -21,7 +27,7 @@ class B extends React.Component {
 
   render() {
     return (
-      <span>{this.state.count}</span>
+      <span ref={this.ref}>{this.state.count}</span>
     )
   }
 }
@@ -44,6 +50,7 @@ function myCount() {
   const [name, setName] = useState('yyy')
 
   const context = useContext(MyContext)
+  const inputRef = useRef()
 
   // useEffect(() => {
   //   const timeId = setInterval(() => {
@@ -55,7 +62,7 @@ function myCount() {
   // }, [])
 
   useEffect(() => {
-    console.log('effect invoked')
+    console.log(inputRef)
     return () => console.log('effect deleted')
   }, [count])
 
@@ -66,7 +73,7 @@ function myCount() {
 
   return (
     <div>
-      <input value={name} onChange={e => setName(e.target.value)}/>
+      <input ref={inputRef} value={name} onChange={e => setName(e.target.value)}/>
       <button onClick={e => dispathCount({type: 'add'})}>{count}</button>
       {context}
     </div>

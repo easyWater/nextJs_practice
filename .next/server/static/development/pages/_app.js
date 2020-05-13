@@ -163,6 +163,52 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./lib/test-hoc.js":
+/*!*************************!*\
+  !*** ./lib/test-hoc.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* harmony default export */ __webpack_exports__["default"] = (Comp => {
+  function TestHoc(_ref) {
+    let {
+      Component,
+      pageProps
+    } = _ref,
+        rest = _objectWithoutProperties(_ref, ["Component", "pageProps"]);
+
+    console.log('Component: ', Component, 'pageProps: ', pageProps);
+
+    if (pageProps) {
+      pageProps.test = '123';
+    }
+
+    return __jsx(Comp, _extends({
+      Component: Component,
+      pageProps: pageProps
+    }, rest));
+  }
+
+  TestHoc.getInitialProps = Comp.getInitialProps;
+  return TestHoc;
+});
+
+/***/ }),
+
 /***/ "./node_modules/antd/dist/antd.css":
 /*!*****************************************!*\
   !*** ./node_modules/antd/dist/antd.css ***!
@@ -2285,10 +2331,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layout */ "./components/layout.jsx");
 /* harmony import */ var _lib_myContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/myContext */ "./lib/myContext.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/store */ "./store/store.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _lib_test_hoc__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/test-hoc */ "./lib/test-hoc.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -2324,18 +2377,105 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       Component,
       pageProps
     } = this.props;
-    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(_lib_myContext__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
+    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(react_redux__WEBPACK_IMPORTED_MODULE_6__["Provider"], {
+      store: _store_store__WEBPACK_IMPORTED_MODULE_5__["default"]
+    }, __jsx(_lib_myContext__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
       value: this.state.context
-    }, __jsx(Component, pageProps), __jsx("button", {
-      onClick: () => this.setState({
-        context: this.state.context + '000'
-      })
-    }, "change context"))));
+    }, __jsx(Component, pageProps)))));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (myApp);
+/* harmony default export */ __webpack_exports__["default"] = (Object(_lib_test_hoc__WEBPACK_IMPORTED_MODULE_7__["default"])(myApp));
+
+/***/ }),
+
+/***/ "./store/store.js":
+/*!************************!*\
+  !*** ./store/store.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+const initialState = {
+  count: 0
+};
+const userInitialState = {
+  name: 'yyy'
+};
+const ADD = 'ADD';
+const UPDATE_NAME = 'UPDATE_NAME';
+
+function countReducer(state = initialState, action) {
+  switch (action.type) {
+    case ADD:
+      return {
+        count: state.count + (action.num || 1)
+      };
+
+    default:
+      return state;
+  }
+}
+
+function userReducer(state = userInitialState, action) {
+  switch (action.type) {
+    case UPDATE_NAME:
+      return _objectSpread({}, state, {
+        name: action.name
+      });
+
+    default:
+      return state;
+  }
+}
+
+function asyncAdd(num) {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch({
+        type: ADD,
+        num
+      });
+    }, 1000);
+  };
+}
+
+const allReducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  count: countReducer,
+  user: userReducer
+});
+const store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(allReducers, {
+  count: initialState,
+  user: userInitialState
+}, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a))); // console.log(store.getState())
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
+store.dispatch(asyncAdd(5));
+store.dispatch({
+  type: ADD
+}); // store.dispatch({ type: UPDATE_NAME, name: 'lilei' })
+
+/* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),
 
@@ -2392,6 +2532,50 @@ module.exports = require("prop-types-exact");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+
+/***/ "redux-devtools-extension":
+/*!*******************************************!*\
+  !*** external "redux-devtools-extension" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
 
 /***/ }),
 

@@ -3,6 +3,11 @@ import 'antd/dist/antd.css'
 import Layout from '../components/layout'
 import MyContext from '../lib/myContext'
 
+import store from '../store/store'
+import { Provider } from 'react-redux'
+
+import TestHoc from '../lib/test-hoc'
+
 class myApp extends App {
 
   state = {
@@ -24,13 +29,14 @@ class myApp extends App {
     return (
       <Container>
         <Layout>
-          <MyContext.Provider value={this.state.context}>
-            <Component {...pageProps} />
-            <button onClick={() => this.setState({ context: this.state.context + '000' })}>change context</button>
-          </MyContext.Provider>
+          <Provider store={store}>
+            <MyContext.Provider value={this.state.context}>
+              <Component {...pageProps} />
+            </MyContext.Provider>
+          </Provider>
         </Layout>
       </Container>
     )
   }
 }
-export default myApp
+export default TestHoc(myApp)
