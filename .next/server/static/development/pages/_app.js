@@ -163,10 +163,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./lib/test-hoc.js":
-/*!*************************!*\
-  !*** ./lib/test-hoc.js ***!
-  \*************************/
+/***/ "./lib/with-redux.js":
+/*!***************************!*\
+  !*** ./lib/with-redux.js ***!
+  \***************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -174,8 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./store/store.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -183,28 +190,59 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+
+const isServer = true;
+const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
+
+function getOrCreateStore(initialState) {
+  if (isServer) {
+    //服务端每次创建新的store
+    return Object(_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(initialState);
+  }
+
+  if (!window[__NEXT_REDUX_STORE__]) {
+    //客户端保持一个store
+    window[__NEXT_REDUX_STORE__] = Object(_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(initialState);
+  }
+
+  return window[__NEXT_REDUX_STORE__];
+}
+
 /* harmony default export */ __webpack_exports__["default"] = (Comp => {
-  function TestHoc(_ref) {
+  function withReduxApp(_ref) {
     let {
       Component,
-      pageProps
+      pageProps,
+      initialReduxState
     } = _ref,
-        rest = _objectWithoutProperties(_ref, ["Component", "pageProps"]);
+        rest = _objectWithoutProperties(_ref, ["Component", "pageProps", "initialReduxState"]);
 
-    console.log('Component: ', Component, 'pageProps: ', pageProps);
-
-    if (pageProps) {
-      pageProps.test = '123';
-    }
-
+    const reduxStore = getOrCreateStore(initialReduxState);
     return __jsx(Comp, _extends({
       Component: Component,
-      pageProps: pageProps
+      pageProps: pageProps,
+      reduxStore: reduxStore
     }, rest));
   }
 
-  TestHoc.getInitialProps = Comp.getInitialProps;
-  return TestHoc;
+  withReduxApp.getInitialProps = async ctx => {
+    const reduxStore = getOrCreateStore();
+    ctx.reduxStore = reduxStore; //将store传递给_app继而传递给各个页面，使得各个页面在服务端可以在getInitialProps中修改store
+
+    let appProps = {};
+
+    if (typeof Comp.getInitialProps === 'function') {
+      appProps = await Comp.getInitialProps(ctx);
+    } // const appProps = await Comp.getInitialProps(ctx)
+
+
+    return _objectSpread({}, appProps, {
+      initialReduxState: reduxStore.getState() //序列化store中的数据
+
+    });
+  };
+
+  return withReduxApp;
 });
 
 /***/ }),
@@ -2331,15 +2369,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd_dist_antd_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layout */ "./components/layout.jsx");
 /* harmony import */ var _lib_myContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/myContext */ "./lib/myContext.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/store */ "./store/store.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _lib_test_hoc__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/test-hoc */ "./lib/test-hoc.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _lib_with_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/with-redux */ "./lib/with-redux.js");
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -2357,10 +2393,10 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
     });
   }
 
-  static async getInitialProps({
-    Component,
-    ctx
-  }) {
+  static async getInitialProps(ctx) {
+    const {
+      Component
+    } = ctx;
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -2375,10 +2411,11 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
   render() {
     const {
       Component,
-      pageProps
+      pageProps,
+      reduxStore
     } = this.props;
-    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(react_redux__WEBPACK_IMPORTED_MODULE_6__["Provider"], {
-      store: _store_store__WEBPACK_IMPORTED_MODULE_5__["default"]
+    return __jsx(next_app__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(react_redux__WEBPACK_IMPORTED_MODULE_5__["Provider"], {
+      store: reduxStore
     }, __jsx(_lib_myContext__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
       value: this.state.context
     }, __jsx(Component, pageProps)))));
@@ -2386,7 +2423,7 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_lib_test_hoc__WEBPACK_IMPORTED_MODULE_7__["default"])(myApp));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_lib_with_redux__WEBPACK_IMPORTED_MODULE_6__["default"])(myApp));
 
 /***/ }),
 
@@ -2394,11 +2431,14 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 /*!************************!*\
   !*** ./store/store.js ***!
   \************************/
-/*! exports provided: default */
+/*! exports provided: asyncAdd, addCount, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asyncAdd", function() { return asyncAdd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCount", function() { return addCount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return returnStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
@@ -2457,25 +2497,30 @@ function asyncAdd(num) {
     }, 1000);
   };
 }
-
+function addCount(num) {
+  return {
+    type: ADD,
+    num
+  };
+}
 const allReducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   count: countReducer,
   user: userReducer
-});
-const store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(allReducers, {
-  count: initialState,
-  user: userInitialState
-}, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a))); // console.log(store.getState())
+}); // console.log(store.getState())
+// store.subscribe(() => {
+//   console.log(store.getState())
+// })
+// store.dispatch(asyncAdd(5))
+// store.dispatch({ type: ADD })
+// store.dispatch({ type: UPDATE_NAME, name: 'lilei' })
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-store.dispatch(asyncAdd(5));
-store.dispatch({
-  type: ADD
-}); // store.dispatch({ type: UPDATE_NAME, name: 'lilei' })
-
-/* harmony default export */ __webpack_exports__["default"] = (store);
+function returnStore(defaultState) {
+  const store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(allReducers, Object.assign({}, {
+    count: initialState,
+    user: userInitialState
+  }, defaultState), Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)));
+  return store;
+}
 
 /***/ }),
 

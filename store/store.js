@@ -34,11 +34,17 @@ function userReducer(state = userInitialState, action) {
   }
 }
 
-function asyncAdd(num) {
+export function asyncAdd(num) {
   return (dispatch) => {
     setTimeout(() => {
       dispatch({ type:  ADD, num})
     }, 1000)
+  }
+}
+
+export function addCount(num) {
+  return {
+    type:  ADD, num
   }
 }
 
@@ -47,20 +53,23 @@ const allReducers = combineReducers({
   user: userReducer
 })
 
-const store = createStore(
-  allReducers, 
-  {
-    count: initialState,
-    user: userInitialState
-  },
-  composeWithDevTools(applyMiddleware(ReduxThunk))
-)
 // console.log(store.getState())
-store.subscribe(() => {
-  console.log(store.getState())
-})
-store.dispatch(asyncAdd(5))
-store.dispatch({ type: ADD })
+// store.subscribe(() => {
+//   console.log(store.getState())
+// })
+// store.dispatch(asyncAdd(5))
+// store.dispatch({ type: ADD })
 // store.dispatch({ type: UPDATE_NAME, name: 'lilei' })
 
-export default store
+export default function returnStore(defaultState) {
+  const store = createStore(
+    allReducers, 
+    Object.assign({}, 
+      {
+        count: initialState,
+        user: userInitialState
+      }, defaultState),
+    composeWithDevTools(applyMiddleware(ReduxThunk))
+  )
+  return store
+}

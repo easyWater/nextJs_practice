@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { asyncAdd, addCount } from '../store/store'
 
 const Index = ({ count, name, reName, add}) => {
   return (
@@ -10,6 +11,11 @@ const Index = ({ count, name, reName, add}) => {
       <button onClick={() => add(count)}>add count</button>
     </div>
   )
+}
+
+Index.getInitialProps = async (ctx) => {
+  await ctx.reduxStore.dispatch(asyncAdd(3))
+  return {}
 }
 
 function mapStateToProps(state) {

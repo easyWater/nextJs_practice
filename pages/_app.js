@@ -3,10 +3,9 @@ import 'antd/dist/antd.css'
 import Layout from '../components/layout'
 import MyContext from '../lib/myContext'
 
-import store from '../store/store'
 import { Provider } from 'react-redux'
 
-import TestHoc from '../lib/test-hoc'
+import withRedux from '../lib/with-redux'
 
 class myApp extends App {
 
@@ -14,7 +13,8 @@ class myApp extends App {
     context: 'context'
   }
 
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps(ctx) {
+    const { Component } = ctx
     let pageProps = {}
     if(Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
@@ -25,11 +25,11 @@ class myApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, reduxStore } = this.props
     return (
       <Container>
         <Layout>
-          <Provider store={store}>
+          <Provider store={reduxStore}>
             <MyContext.Provider value={this.state.context}>
               <Component {...pageProps} />
             </MyContext.Provider>
@@ -39,4 +39,4 @@ class myApp extends App {
     )
   }
 }
-export default TestHoc(myApp)
+export default withRedux(myApp)
