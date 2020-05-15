@@ -1,7 +1,15 @@
+import { useEffect } from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { asyncAdd, addCount } from '../store/store'
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
 
 const Index = ({ count, name, reName, add}) => {
+  useEffect(() => {
+    axios.get('/api/user/info').then(res => console.log(res))
+  }, [])
   return (
     <div>
       <span>
@@ -9,6 +17,7 @@ const Index = ({ count, name, reName, add}) => {
       </span><br />
       <input value={name} onChange={(e) => reName(e.target.value)} />
       <button onClick={() => add(count)}>add count</button>
+      <a href={publicRuntimeConfig.GITHUB_OAUTH_URL}>去登陆</a>
     </div>
   )
 }

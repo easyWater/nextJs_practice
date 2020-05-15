@@ -1,4 +1,5 @@
 const withCss = require('@zeit/next-css') //在nextJs中引用css文件需要的插件
+const config = require('./config')
 
 const configs = {
   distDir: 'dest', //编译文件的输出目录
@@ -33,12 +34,17 @@ const configs = {
   publicRuntimeConfig: { //在服务端渲染和客户端渲染都可以获取的配置
     staticFolder: '/static',
   }
-
-
 }
 
 if(typeof require !== 'undefined') {
   require.extensions['.css'] = file => {}
 }
 
-module.exports = withCss({})
+const GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize'
+const scope = 'user'
+
+module.exports = withCss({
+  publicRuntimeConfig: { //在服务端渲染和客户端渲染都可以获取的配置
+    GITHUB_OAUTH_URL: `${GITHUB_OAUTH_URL}?client_id=${config.github.client_id}&scope=${scope}`
+  }
+})
