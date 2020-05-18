@@ -29,7 +29,7 @@ app.prepare().then(() => { //在next将pages下面的组件转化之后再启动
 
 
   server.use(async (ctx, next) => {
-    console.log('session is: ', ctx.session)
+    // console.log('session is: ', ctx.session)
     await next()
   })
 
@@ -56,6 +56,7 @@ app.prepare().then(() => { //在next将pages下面的组件转化之后再启动
   server.use(router.routes())
 
   server.use(async (ctx, next) => { //将next集成到koa服务中
+    ctx.req.session = ctx.session
     await handle(ctx.req, ctx.res)
     ctx.respond = false
   })

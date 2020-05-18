@@ -1,11 +1,17 @@
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
-import { Button, Layout, Input, Avatar } from 'antd'
+import getConfig from 'next/config'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import { withRouter } from 'next/router'
+import { Button, Layout, Input, Avatar, Tooltip, Dropdown, Menu } from 'antd'
 import { GithubOutlined, UserOutlined } from '@ant-design/icons';
 
 import Container from './container'
+import { logout } from '../store/store'
 
 const { Header, Content, Footer } = Layout
+const { publicRuntimeConfig } = getConfig()
 
 const githubIconStyle = {
   color: 'white',
@@ -19,9 +25,7 @@ const footerStyle = {
   textAlign: 'center'
 }
 
-const Comp = ({ color, children, style }) => <div style={{color, ...style}}>{children}</div> 
-
-export default ({ children }) => {
+const MyLayout = ({ children, user, logout, router }) => {
 
   const [search, setSearch] = useState('')
 
@@ -31,10 +35,35 @@ export default ({ children }) => {
 
   const handleOnSearch = useCallback(() => {}, [])
 
+  const handleLogout = useCallback(() => {
+    logout()
+  }, [logout])
+
+  // const handleAuthUrl = useCallback((e) => {
+  //   e.preventDefault()
+  //   axios.get(`/prepare-auth?url=${router.asPath}`).then(res => {
+  //     if(res.status === 200) {
+  //       location.href = publicRuntimeConfig.OAUTH_URL
+  //     }else {
+  //       console.log('prepare auth failed', res)
+  //     }
+  //   }).catch(err => {
+  //     console.log('prepare auth failed', err)
+  //   })
+  // }, [])
+
+  const userDropMenu = (
+    <Menu>
+      <Menu.Item>
+        <span onClick={handleLogout}>登 出</span>
+      </Menu.Item>
+    </Menu>
+  )
+
   return (
     <Layout>
       <Header>
-        <div className="header-inner">
+        <Container renderer={<div className="header-inner"></div>}>
           <div className="header-left">
             <div className="icon">
               <GithubOutlined style={githubIconStyle} />
@@ -45,13 +74,27 @@ export default ({ children }) => {
           </div>
           <div className="header-right">
             <div className="user">
-              <Avatar size={40} icon={<UserOutlined />} />
+              {
+                user && user.id ? (
+                  <Dropdown overlay={userDropMenu}>
+                    <a href='/'>
+                      <Avatar size={40} src={user.avatar_url} />
+                    </a>
+                  </Dropdown>
+                ) : (
+                  <Tooltip title='点击登录'>
+                    <a href={`/prepare-auth?url=${router.asPath}`}>
+                      <Avatar size={40} icon={<UserOutlined />} />
+                    </a>
+                  </Tooltip>
+                )
+              }
             </div>
           </div>
-        </div>
+        </Container>
       </Header>
       <Content>
-        <Container renderer={<Comp color="red" />}>
+        <Container>
           {children}
         </Container>
       </Content>
@@ -78,7 +121,25 @@ export default ({ children }) => {
           .ant-layout {
             height: 100%;
           }
+          .ant-layout-header {
+            padding-left: 0px;
+            padding-right: 0px;
+          }
         `}</style>
     </Layout>
   )
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyLayout))

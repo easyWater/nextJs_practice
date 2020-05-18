@@ -40,11 +40,9 @@ if(typeof require !== 'undefined') {
   require.extensions['.css'] = file => {}
 }
 
-const GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize'
-const scope = 'user'
-
 module.exports = withCss({
   publicRuntimeConfig: { //在服务端渲染和客户端渲染都可以获取的配置
-    GITHUB_OAUTH_URL: `${GITHUB_OAUTH_URL}?client_id=${config.github.client_id}&scope=${scope}`
+    GITHUB_OAUTH_URL: config.GITHUB_OAUTH_URL,
+    OAUTH_URL: config.OAUTH_URL
   }
 })

@@ -11,7 +11,7 @@ class RedisSessionStore {
   //从redis中获取session
   async get(sid) {
     const id = getRedisSessionId(sid)
-    console.log('get session', id)
+    // console.log('get session', id)
     const data = await this.client.get(id)
     if(!data) {
       return null
@@ -28,7 +28,7 @@ class RedisSessionStore {
   //将session存入redis
   async set(sid, sess, ttl) {
     const id = getRedisSessionId(sid)
-    console.log('set session', id)
+    // console.log('set session', id)
     if(typeof ttl === 'number') {
       ttl = Math.ceil(ttl / 1000)
     }
@@ -47,7 +47,7 @@ class RedisSessionStore {
   //根据key删除session
   async destroy(sid) {
     const id = getRedisSessionId(sid)
-    console.log('destroy session', id)
+    // console.log('destroy session', id)
     await this.client.del(id)
   }
 }

@@ -17,7 +17,7 @@ const Index = ({ count, name, reName, add}) => {
       </span><br />
       <input value={name} onChange={(e) => reName(e.target.value)} />
       <button onClick={() => add(count)}>add count</button>
-      <a href={publicRuntimeConfig.GITHUB_OAUTH_URL}>去登陆</a>
+      <a href={publicRuntimeConfig.OAUTH_URL}>去登陆</a>
     </div>
   )
 }

@@ -1,10 +1,15 @@
 
 const axios = require('axios')
+// const getConfig = require('next/config')
 
 const config = require('../config')
+
 const { client_id, client_secret, get_token_url } = config.github
+// const { publicRuntimeConfig } = getConfig()
+
 
 module.exports = (server) => {
+  // 登录
   server.use(async (ctx, next) => {
     if(ctx.path === '/auth') {
       const code = ctx.query.code
@@ -36,7 +41,8 @@ module.exports = (server) => {
         })
         ctx.session.userInfo = userInfoRes.data
         
-        ctx.redirect('/')
+        ctx.redirect((ctx.session && ctx.session.authBeforeUrl) || '/')
+        ctx.session.authBeforeUrl = ''
       }else {
         const errMsg = result.data && result.data.error
         ctx.body = `request token failed ${errMsg}`
@@ -45,4 +51,31 @@ module.exports = (server) => {
       await next()
     }
   })
+
+  // 登出
+  server.use(async (ctx, next) => {
+    const method = ctx.method
+    const path = ctx.path
+    if(path === '/logout' && method === 'POST') {
+      ctx.session = null
+      ctx.body = 'logout success'
+    }else {
+      await next()
+    }
+  })
+
+  // 记录登录前的url
+  server.use(async (ctx, next) => {
+    const method = ctx.method
+    const path = ctx.path
+    if(path === '/prepare-auth' && method === 'GET') {
+      ctx.session.authBeforeUrl = ctx.query.url
+      // ctx.body = 'ready'
+      ctx.redirect(config.OAUTH_URL)
+      // ctx.redirect(publicRuntimeConfig.OAUTH_URL)
+    }else {
+      await next()
+    }
+  })
+
 }
