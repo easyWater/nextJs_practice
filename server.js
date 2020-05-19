@@ -3,9 +3,11 @@ const next = require('next')
 const Router = require('koa-router')
 const session = require('koa-session')
 const Redis = require('ioredis')
+const koaBody = require('koa-body')
 
 const RedisSessionStore = require('./server/session-store')
 const auth = require('./server/auth')
+const api = require('./server/api')
 
 const dev = process.env.NODE_ENV !== 'production' //判断当前不是生产环境
 const app = next({ dev })
@@ -18,6 +20,8 @@ app.prepare().then(() => { //在next将pages下面的组件转化之后再启动
   const server = new Koa()
   const router = new Router()
 
+  server.use(koaBody())
+
   server.keys = ['easy_water develop github app']
   const SESSION_CONFIG = {
     key: 'yid',
@@ -26,6 +30,7 @@ app.prepare().then(() => { //在next将pages下面的组件转化之后再启动
 
   server.use(session(SESSION_CONFIG, server))
   auth(server)
+  api(server)
 
 
   server.use(async (ctx, next) => {
