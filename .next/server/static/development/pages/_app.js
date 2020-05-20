@@ -2643,11 +2643,7 @@ class myApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
     } = this.props;
     return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_5__["Provider"], {
       store: reduxStore
-    }, this.state.loading ? __jsx(_components_pageLoading__WEBPACK_IMPORTED_MODULE_4__["default"], null) : null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_7___default.a, {
-      href: "/"
-    }, __jsx("a", null, "Index")), "\xA0", __jsx(next_link__WEBPACK_IMPORTED_MODULE_7___default.a, {
-      href: "/detail"
-    }, __jsx("a", null, "Detail")), __jsx("br", null), __jsx(Component, pageProps)));
+    }, this.state.loading ? __jsx(_components_pageLoading__WEBPACK_IMPORTED_MODULE_4__["default"], null) : null, __jsx(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, __jsx(Component, pageProps)));
   }
 
 }

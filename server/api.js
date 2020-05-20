@@ -15,10 +15,10 @@ module.exports = (server) => {
         headers['Authorization'] = `${githubAuth.token_type} ${githubAuth.access_token}`
       }
 
-      const result = await api.requestGithub(ctx.method, `${ctx.url.replace('/github/', '/')}`, ctx.request.body || {}, headers)
-
+      const result = await api.requestGithub(ctx.method, `${ctx.url.replace('/github/', '')}`, ctx.request.body || {}, headers)
       ctx.status = result.status
-      ctx.body = result.body
+      ctx.set('Content-Type', 'application/json')
+      ctx.body = result.data
 
     }else {
       await next()
