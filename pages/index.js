@@ -3,15 +3,42 @@ import { MailOutlined } from '@ant-design/icons';
 import getConfig from 'next/config'
 import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
+import { useEffect } from 'react'
+import LRU from 'lru-cache'
 
 import { request } from '../lib/api'
 import Repo from '../components/repo'
 
 const { publicRuntimeConfig } = getConfig()
 const { TabPane } = Tabs
+const cache = new LRU({ //在maxAge时间内没有通过get方法使用缓存的数据，该部分数据会被清空，每次访问都会刷新maxAge
+  maxAge: 1000 * 10
+})
+
+const isServer = typeof window === 'undefined'
+let cachedUserRepos
+let cachedUserStared
 
 const Index = ({ userRepos, userStared, user, router }) => {
-  
+  // console.log('userRepos',userRepos, 'userStared', userStared)
+
+  useEffect(() => {
+    cachedUserRepos = userRepos
+    cachedUserStared = userStared
+    setTimeout(() => {
+      cachedUserRepos = null
+      cachedUserStared = null
+    }, 1000 * 60 * 10)
+
+    // if(userRepos) {
+    //   cache.set('cachedUserRepos', userRepos)
+    // }
+    // if(userStared) {
+    //   cache.set('cachedUserStared', userStared)
+    // }    
+    
+  }, [userRepos, userStared])
+
   if(!user || !user.id) {
     return (
       <div className="root">
@@ -103,10 +130,26 @@ const Index = ({ userRepos, userStared, user, router }) => {
 Index.getInitialProps = async ({ ctx, reduxStore }) => {
 
   const user = reduxStore.getState().user
-  if(!user || !user.id) {
+  if(!user || !user.id) { //未登录
     return {
-      isLogin: false
     }
+  }
+
+  if(!isServer) {
+    if(cachedUserRepos && cachedUserStared) {
+      return {
+        userRepos: cachedUserRepos,
+        userStared: cachedUserStared
+      }
+    }
+
+    // if(cache.get('cachedUserRepos') && cache.get('cachedUserStared')) {
+    //   return {
+    //     userRepos: cache.get('cachedUserRepos'),
+    //     userStared: cache.get('cachedUserStared')
+    //   }
+    // }
+
   }
 
   const userRepos = await request({
@@ -118,7 +161,6 @@ Index.getInitialProps = async ({ ctx, reduxStore }) => {
   }, ctx.req, ctx.res)
 
   return {
-    isLogin: true,
     userRepos: userRepos.data || [],
     userStared: userStared.data || []
   }
