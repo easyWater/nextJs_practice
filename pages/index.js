@@ -8,6 +8,7 @@ import LRU from 'lru-cache'
 
 import { request } from '../lib/api'
 import Repo from '../components/repo'
+import { cacheArr } from '../lib/repo-basic-cache'
 
 const { publicRuntimeConfig } = getConfig()
 const { TabPane } = Tabs
@@ -38,6 +39,13 @@ const Index = ({ userRepos, userStared, user, router }) => {
     // }    
     
   }, [userRepos, userStared])
+
+  useEffect(() => {
+    if(!isServer) {
+      cacheArr(userRepos)
+      cacheArr(userStared)
+    }
+  })
 
   if(!user || !user.id) {
     return (

@@ -1,10 +1,11 @@
 import { withRouter } from 'next/router'
 import { Row, Col, List, Pagination } from 'antd'
 import Link from 'next/link'
-import { memo, isValidElement } from 'react'
+import { memo, isValidElement, useEffect } from 'react'
 
 import api from '../lib/api'
 import Repo from '../components/repo'
+import { cacheArr } from '../lib/repo-basic-cache'
 
 const LANGUAGES = ['JavaScript', 'HTML', 'CSS', 'TypeScript', 'Java', 'Rust']
 const SORT_TYPES = [
@@ -40,6 +41,8 @@ const selectedItemStyle = {
 
 const per_page = 20
 
+const isServer = typeof window === 'undefined'
+
 function noop() {}
 
 const FilterLink = memo(({ query, lang, sort, order, name, page }) => {
@@ -47,9 +50,9 @@ const FilterLink = memo(({ query, lang, sort, order, name, page }) => {
   let queryString = `?query=${query}`
   if(lang) queryString += `&lang=${lang}`
   if(sort) queryString += `&sort=${sort}&order=${order || 'desc'}`
+  if(page) queryString += `&page=${page}`
 
-  queryString += `&per_page=${per_page}`
-  queryString += `&page=${page || 1}`
+  // queryString += `&per_page=${per_page}`
 
   return (
     <Link href={`/search${queryString}`}>
@@ -59,7 +62,12 @@ const FilterLink = memo(({ query, lang, sort, order, name, page }) => {
 })
 
 function Search({ router, repos }) {
-  // console.log(repos)
+  
+  useEffect(() => {
+    if(!isServer) {
+      cacheArr(repos.items)
+    }
+  })
   
   const { ...rest } = router.query
   const { lang, sort, order, page } = rest
@@ -118,13 +126,17 @@ function Search({ router, repos }) {
           <div className="pagination">
             <Pagination
               pageSize={ per_page }
-              current={ Number(page) }
+              current={ Number(page) || 1 }
               total={ repos.total_count > 1000 ? 1000 : repos.total_count }
               onChange={ noop }
               showSizeChanger={false}
-              itemRender={ (page, type, ol) => {
-                const name = type === 'page' ? page : ol                
-                return <FilterLink {...rest} name={name} page={page} />
+              itemRender={ (index, type, originalElement) => {
+                const name = type === 'page' ? index : originalElement 
+                
+                if((index || 1) === (Number(page) || 1)) {
+                  return originalElement
+                }               
+                return <FilterLink {...rest} name={name} page={index} />
               } }
             />
           </div>
@@ -169,7 +181,7 @@ Search.getInitialProps = async({ ctx }) => {
   if(sort) queryString += `&sort=${sort}&order=${order || 'desc'}`
 
   queryString += `&per_page=${per_page}`
-  queryString += `&page=${page}`
+  queryString += `&page=${page || 1}`
 
   const result = await api.request({
     url: `search/repositories${queryString}`

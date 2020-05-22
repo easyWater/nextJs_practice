@@ -24,7 +24,7 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
-    "/next/dist/pages/_error": [
+    "/detail/issues": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
