@@ -5,7 +5,6 @@ import { memo, isValidElement } from 'react'
 
 import api from '../lib/api'
 import Repo from '../components/repo'
-import repo from '../components/repo'
 
 const LANGUAGES = ['JavaScript', 'HTML', 'CSS', 'TypeScript', 'Java', 'Rust']
 const SORT_TYPES = [
@@ -48,9 +47,9 @@ const FilterLink = memo(({ query, lang, sort, order, name, page }) => {
   let queryString = `?query=${query}`
   if(lang) queryString += `&lang=${lang}`
   if(sort) queryString += `&sort=${sort}&order=${order || 'desc'}`
-  if(page) queryString += `&query=${page}`
 
   queryString += `&per_page=${per_page}`
+  queryString += `&page=${page || 1}`
 
   return (
     <Link href={`/search${queryString}`}>
@@ -60,7 +59,7 @@ const FilterLink = memo(({ query, lang, sort, order, name, page }) => {
 })
 
 function Search({ router, repos }) {
-  console.log(repos)
+  // console.log(repos)
   
   const { ...rest } = router.query
   const { lang, sort, order, page } = rest
@@ -118,14 +117,14 @@ function Search({ router, repos }) {
           { repos.items.map(repo => <Repo repo={repo} key={repo.id} />) }
           <div className="pagination">
             <Pagination
-              pageSize={ 30 }
-              current={ Number(page) || 1 }
+              pageSize={ per_page }
+              current={ Number(page) }
               total={ repos.total_count > 1000 ? 1000 : repos.total_count }
               onChange={ noop }
-              renderItem={ (page, type, ol) => {
-                const name = type === 'page' ? page : ol
-                const p = type === 'page' ? page : page === 'prev' ? page - 1 : page + 1
-                return <FilterLink {...rest} name={name} page={p} />
+              showSizeChanger={false}
+              itemRender={ (page, type, ol) => {
+                const name = type === 'page' ? page : ol                
+                return <FilterLink {...rest} name={name} page={page} />
               } }
             />
           </div>
@@ -168,9 +167,9 @@ Search.getInitialProps = async({ ctx }) => {
   let queryString = `?q=${query}`
   if(lang) queryString += `+language:${lang}`
   if(sort) queryString += `&sort=${sort}&order=${order || 'desc'}`
-  if(page) queryString += `&page=${page}`
 
   queryString += `&per_page=${per_page}`
+  queryString += `&page=${page}`
 
   const result = await api.request({
     url: `search/repositories${queryString}`
