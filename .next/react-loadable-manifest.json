@@ -1,4 +1,438 @@
 {
+  "../../components/markdownRenderer": [
+    {
+      "id": "./node_modules/antd/dist/antd.css",
+      "name": "./node_modules/antd/dist/antd.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 1,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/github-markdown-css/github-markdown.css",
+      "name": "./node_modules/github-markdown-css/github-markdown.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 6,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": "./components/markdownRenderer.jsx",
+      "name": "./components/markdownRenderer.jsx",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/linkify-it/index.js",
+      "name": "./node_modules/linkify-it/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/linkify-it/lib/re.js",
+      "name": "./node_modules/linkify-it/lib/re.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/index.js",
+      "name": "./node_modules/markdown-it/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/common/entities.js",
+      "name": "./node_modules/markdown-it/lib/common/entities.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/common/html_blocks.js",
+      "name": "./node_modules/markdown-it/lib/common/html_blocks.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/common/html_re.js",
+      "name": "./node_modules/markdown-it/lib/common/html_re.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/common/utils.js",
+      "name": "./node_modules/markdown-it/lib/common/utils.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/helpers/index.js",
+      "name": "./node_modules/markdown-it/lib/helpers/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/helpers/parse_link_destination.js",
+      "name": "./node_modules/markdown-it/lib/helpers/parse_link_destination.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/helpers/parse_link_label.js",
+      "name": "./node_modules/markdown-it/lib/helpers/parse_link_label.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/helpers/parse_link_title.js",
+      "name": "./node_modules/markdown-it/lib/helpers/parse_link_title.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/index.js",
+      "name": "./node_modules/markdown-it/lib/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/parser_block.js",
+      "name": "./node_modules/markdown-it/lib/parser_block.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/parser_core.js",
+      "name": "./node_modules/markdown-it/lib/parser_core.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/parser_inline.js",
+      "name": "./node_modules/markdown-it/lib/parser_inline.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/presets/commonmark.js",
+      "name": "./node_modules/markdown-it/lib/presets/commonmark.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/presets/default.js",
+      "name": "./node_modules/markdown-it/lib/presets/default.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/presets/zero.js",
+      "name": "./node_modules/markdown-it/lib/presets/zero.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/renderer.js",
+      "name": "./node_modules/markdown-it/lib/renderer.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/ruler.js",
+      "name": "./node_modules/markdown-it/lib/ruler.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/blockquote.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/blockquote.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/code.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/code.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/fence.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/fence.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/heading.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/heading.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/hr.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/hr.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/html_block.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/html_block.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/lheading.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/lheading.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/list.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/list.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/paragraph.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/paragraph.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/reference.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/reference.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/state_block.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/state_block.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_block/table.js",
+      "name": "./node_modules/markdown-it/lib/rules_block/table.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/block.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/block.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/inline.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/inline.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/linkify.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/linkify.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/normalize.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/normalize.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/replacements.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/replacements.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/smartquotes.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/smartquotes.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_core/state_core.js",
+      "name": "./node_modules/markdown-it/lib/rules_core/state_core.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/autolink.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/autolink.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/backticks.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/backticks.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/balance_pairs.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/balance_pairs.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/emphasis.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/emphasis.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/entity.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/entity.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/escape.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/escape.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/html_inline.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/html_inline.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/image.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/image.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/link.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/link.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/newline.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/newline.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/state_inline.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/state_inline.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/strikethrough.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/strikethrough.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/text.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/text.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/rules_inline/text_collapse.js",
+      "name": "./node_modules/markdown-it/lib/rules_inline/text_collapse.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/lib/token.js",
+      "name": "./node_modules/markdown-it/lib/token.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/markdown-it/node_modules/entities/lib/maps/entities.json",
+      "name": "./node_modules/markdown-it/node_modules/entities/lib/maps/entities.json",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/mdurl/decode.js",
+      "name": "./node_modules/mdurl/decode.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/mdurl/encode.js",
+      "name": "./node_modules/mdurl/encode.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/mdurl/format.js",
+      "name": "./node_modules/mdurl/format.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/mdurl/index.js",
+      "name": "./node_modules/mdurl/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/mdurl/parse.js",
+      "name": "./node_modules/mdurl/parse.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/punycode/punycode.js",
+      "name": "./node_modules/punycode/punycode.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/categories/Cc/regex.js",
+      "name": "./node_modules/uc.micro/categories/Cc/regex.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/categories/Cf/regex.js",
+      "name": "./node_modules/uc.micro/categories/Cf/regex.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/categories/P/regex.js",
+      "name": "./node_modules/uc.micro/categories/P/regex.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/categories/Z/regex.js",
+      "name": "./node_modules/uc.micro/categories/Z/regex.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/index.js",
+      "name": "./node_modules/uc.micro/index.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/uc.micro/properties/Any/regex.js",
+      "name": "./node_modules/uc.micro/properties/Any/regex.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
+  ],
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",

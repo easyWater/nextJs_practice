@@ -4,6 +4,7 @@ const Router = require('koa-router')
 const session = require('koa-session')
 const Redis = require('ioredis')
 const koaBody = require('koa-body')
+const atob = require('atob')
 
 const RedisSessionStore = require('./server/session-store')
 const auth = require('./server/auth')
@@ -12,6 +13,8 @@ const api = require('./server/api')
 const dev = process.env.NODE_ENV !== 'production' //判断当前不是生产环境
 const app = next({ dev })
 const handle = app.getRequestHandler()
+
+global.atob = atob
 
 // 创建redis client
 const redis = new Redis()

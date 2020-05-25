@@ -67,14 +67,14 @@ export default (Comp, type) => {
     )
   }
 
-  withDetail.getInitialProps = async ({ ctx }) => {
-    
+  withDetail.getInitialProps = async (context) => {
+    const { ctx } = context
     const { owner, name } = ctx.query
     const full_name = `${owner}/${name}`
 
     let pageData = {}
     if(Comp.getInitialProps) {
-      pageData = await Comp.getInitialProps()
+      pageData = await Comp.getInitialProps(context)
     }
 
     if(get(full_name)) {

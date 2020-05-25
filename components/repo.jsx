@@ -1,13 +1,10 @@
 import Link from 'next/link'
 import { StarFilled } from '@ant-design/icons'
-import moment from 'moment'
+
+import { getMomentDate } from '../lib/utils'
 
 function getLicense(license) {
   return license ? `${license.spdx_id} license` : ''
-}
-
-function getMomentDate(time) {
-  return moment(time).fromNow()
 }
 
 export default ({ repo }) => {
