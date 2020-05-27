@@ -11,5 +11,3 @@ module.exports = {
   GITHUB_OAUTH_URL,
   OAUTH_URL: `${GITHUB_OAUTH_URL}?client_id=${client_id}&scope=${scope}`
 }
-
-//access_token = b8dcf37c82116b87cbc0d84741e56642bf7fabd1
